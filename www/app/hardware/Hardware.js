@@ -2227,11 +2227,6 @@ define(['app'], function (app) {
 				e.preventDefault();
 				SetRFXCOMMode();
 			});
-			$('#hardwarecontent #firmwarebutton').click(function (e) {
-				e.preventDefault();
-				$rootScope.hwidx = $('#hardwarecontent #idx').val();
-				SwitchLayout('RFXComFirmware');
-			});
 
 			$('#hardwarecontent #idx').val(idx);
 			$('#hardwarecontent #Keeloq').prop('checked', ((Mode6 & 0x01) != 0));
@@ -2267,8 +2262,15 @@ define(['app'], function (app) {
 			if (version.indexOf("Pro XL")==0) {
 				var ASyncType = (Extra=="")?0:parseInt(Extra);
 				$('#hardwarecontent #rfx_xl_settings').show();
+				$('#hardwarecontent #firmwarebutton').hide();
 			} else {
 				$('#hardwarecontent #rfx_xl_settings').hide();
+				$('#hardwarecontent #firmwarebutton').show();
+				$('#hardwarecontent #firmwarebutton').click(function (e) {
+					e.preventDefault();
+					$rootScope.hwidx = $('#hardwarecontent #idx').val();
+					SwitchLayout('RFXComFirmware');
+				});
 			}
 			$('#hardwarecontent #combo_rfx_xl_async_type').val(ASyncType);
 
